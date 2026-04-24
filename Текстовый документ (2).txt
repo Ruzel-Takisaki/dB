@@ -1,0 +1,190 @@
+{
+    "type": "database",
+    "name": "dormitory_new",
+    "objects": [
+        {
+            "type": "table",
+            "database": null,
+            "name": "Dormitories",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Dormitories (\n    id_общежития INTEGER PRIMARY KEY AUTOINCREMENT,\n    название TEXT NOT NULL,\n    адрес TEXT NOT NULL\n)",
+            "columns": [
+                {
+                    "name": "id_общежития",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT"
+                        }
+                    ]
+                },
+                {
+                    "name": "название",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "адрес",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL\n"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Groups",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Groups (\n    id_группы INTEGER PRIMARY KEY AUTOINCREMENT,\n    название_группы TEXT NOT NULL\n)",
+            "columns": [
+                {
+                    "name": "id_группы",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT"
+                        }
+                    ]
+                },
+                {
+                    "name": "название_группы",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL\n"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Rooms",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Rooms (\n    id_комнаты INTEGER PRIMARY KEY AUTOINCREMENT,\n    номер_комнаты TEXT NOT NULL,\n    этаж INTEGER,\n    id_общежития INTEGER,\n    FOREIGN KEY (id_общежития) REFERENCES Dormitories(id_общежития)\n)",
+            "columns": [
+                {
+                    "name": "id_комнаты",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT"
+                        }
+                    ]
+                },
+                {
+                    "name": "номер_комнаты",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "этаж",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "id_общежития",
+                    "type": "INTEGER"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (id_общежития) REFERENCES Dormitories(id_общежития)\n"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Students",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Students (\n    id_студента INTEGER PRIMARY KEY AUTOINCREMENT,\n    фамилия TEXT NOT NULL,\n    имя TEXT NOT NULL,\n    отчество TEXT,\n    id_группы INTEGER,\n    id_комнаты INTEGER,\n    FOREIGN KEY (id_группы) REFERENCES Groups(id_группы),\n    FOREIGN KEY (id_комнаты) REFERENCES Rooms(id_комнаты)\n)",
+            "columns": [
+                {
+                    "name": "id_студента",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT"
+                        }
+                    ]
+                },
+                {
+                    "name": "фамилия",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "имя",
+                    "type": "TEXT",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "отчество",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "id_группы",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "id_комнаты",
+                    "type": "INTEGER"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (id_группы) REFERENCES Groups(id_группы)"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (id_комнаты) REFERENCES Rooms(id_комнаты)\n"
+                }
+            ],
+            "rows": [
+            ]
+        }
+    ]
+}
